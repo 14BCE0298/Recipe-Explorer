@@ -1,0 +1,19 @@
+{
+  "name": "recipe_explorer",
+  "version": "1.0.0",
+  "description": "Finding recipes for your favorite dish",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/14BCE0298/Recipe-Explorer.git"
+  },
+  "author": "Vishal Sharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/14BCE0298/Recipe-Explorer/issues"
+  },
+  "homepage": "https://github.com/14BCE0298/Recipe-Explorer#readme"
+}
