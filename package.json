@@ -4,7 +4,8 @@
   "description": "Finding recipes for your favorite dish",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,8 @@
   "homepage": "https://github.com/14BCE0298/Recipe-Explorer#readme",
   "devDependencies": {
     "live-server": "^1.2.1",
-    "webpack": "^4.28.3"
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.0"
   },
   "dependencies": {}
 }
