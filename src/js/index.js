@@ -14,8 +14,11 @@ const userDishSearch = async () => {
     const userInput = viewTools.readValue();
     if(userInput) {
         state.dishReceipes = new search(userInput);
+        viewTools.clearSearchBar();
+        viewTools.clearPreviousResult();
         await state.dishReceipes.getRecepies();
         console.log(state.dishReceipes.data);
+        viewTools.displayResults(state.dishReceipes.data);
     }
 }
 
