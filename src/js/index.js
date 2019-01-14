@@ -1,5 +1,7 @@
 // Global app controller
-import search from './models/Search'
+import search from './models/Search';
+import * as viewTools from './views/searchView';
+import { elements } from './views/base';
 /**Global state of the app
  * - Search object conatining query and result
  * - current recipe object
@@ -9,7 +11,7 @@ import search from './models/Search'
 const state = {};
 
 const userDishSearch = async () => {
-    const userInput = 'pizza';
+    const userInput = viewTools.readValue();
     if(userInput) {
         state.dishReceipes = new search(userInput);
         await state.dishReceipes.getRecepies();
@@ -17,7 +19,7 @@ const userDishSearch = async () => {
     }
 }
 
-document.addEventListener('submit', e => {
+elements.searchStart.addEventListener('submit', e => {
     e.preventDefault();
     userDishSearch();
 });
