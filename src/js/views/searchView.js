@@ -10,6 +10,20 @@ export const clearPreviousResult = () => {
     elements.resultList.innerHTML = '';
 }
 
+const limitTitleLength = (title) => {
+    if(title.length > 17) {
+        const reducedTitle = [];
+        title.split(' ').reduce((counter, current) => {
+            if(counter + current.length < 17) {
+                reducedTitle.push(current);
+            }
+            return counter += current.length;
+            }, 0);
+            return `${reducedTitle.join(' ')}...`;
+        }
+    return title;
+}
+
 const dispalyRecepieDetails = recipe => {
     const recepieUiEntry = `
             <li>
@@ -18,7 +32,7 @@ const dispalyRecepieDetails = recipe => {
                     <img src="${recipe.image_url}" alt="${recipe.title}">
                 </figure>
                 <div class="results__data">
-                    <h4 class="results__name">${recipe.title}</h4>
+                    <h4 class="results__name">${limitTitleLength(recipe.title)}</h4>
                     <p class="results__author">${recipe.publisher}</p>
                 </div>
             </a>
