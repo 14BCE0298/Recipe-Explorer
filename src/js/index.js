@@ -28,3 +28,12 @@ elements.searchStart.addEventListener('submit', e => {
     e.preventDefault();
     userDishSearch();
 });
+
+elements.resultsPage.addEventListener('click' , e => {
+    const button = e.target.closest('.btn-inline');
+    if(button) {
+        const pageTraverse = parseInt(button.dataset.goto, 10);
+        viewTools.clearPreviousResult();
+        viewTools.displayResults(state.dishReceipes.data, pageTraverse);
+    }
+});
