@@ -1,7 +1,7 @@
 // Global app controller
 import search from './models/Search';
 import * as viewTools from './views/searchView';
-import { elements } from './views/base';
+import { elements, loaderIcon, clearLoader } from './views/base';
 /**Global state of the app
  * - Search object conatining query and result
  * - current recipe object
@@ -16,7 +16,9 @@ const userDishSearch = async () => {
         state.dishReceipes = new search(userInput);
         viewTools.clearSearchBar();
         viewTools.clearPreviousResult();
+        loaderIcon(elements.searchResult);
         await state.dishReceipes.getRecepies();
+        clearLoader();
         console.log(state.dishReceipes.data);
         viewTools.displayResults(state.dishReceipes.data);
     }
