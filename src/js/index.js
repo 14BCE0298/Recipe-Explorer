@@ -21,9 +21,13 @@ const userDishSearch = async () => {
         viewTools.clearSearchBar();
         viewTools.clearPreviousResult();
         loaderIcon(elements.searchResult);
+        try {
         await state.dishReceipes.getRecepies();
         clearLoader();
         viewTools.displayResults(state.dishReceipes.data);
+        } catch(error) {
+            alert(`${error} getting recipes from searched name of dish`);
+        }
     }
 }
 
@@ -43,6 +47,20 @@ elements.resultsPage.addEventListener('click' , e => {
 /**
  * Recipe Controller
  */
-const recipeDetails = new recipeController(47746);
-recipeDetails.getRecipe();
-console.log(recipeDetails); 
+const getRecipeDetails = async() => {
+    const id = window.location.hash.replace('#', '');
+    if(id) {
+        state.dishFromId = new recipeController(id);
+        try {
+        await state.dishFromId.getRecipe();
+        console.log(state.dishFromId);
+        } catch (error) {
+            alert(`${error} getting recipe from Id`);
+        }
+    }
+}
+
+['hashchange', 'load'].forEach(event => {
+    window.addEventListener(event, getRecipeDetails);
+}) 
+ 
