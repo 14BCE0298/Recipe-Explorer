@@ -14,8 +14,14 @@ export default class Recipe {
             this.imgUrl = recipe.data.recipe.image_url;
             this.sourceUrl = recipe.data.recipe.source_url;
             this.ingredients = recipe.data.recipe.ingredients;
+            this.calcTime();
         } catch(error) {
             alert(error);
         } 
+    }
+
+    calcTime() {
+        this.timeMins = Math.ceil((this.ingredients.length) / 3) * 15;
+        this.serves = this.timeMins > 30 ? 3 : 4;
     }
 }
