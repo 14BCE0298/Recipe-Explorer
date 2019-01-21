@@ -15,6 +15,7 @@ export default class Recipe {
             this.sourceUrl = recipe.data.recipe.source_url;
             this.ingredients = recipe.data.recipe.ingredients;
             this.calcTime();
+            this.standardizeIngredients();
         } catch(error) {
             alert(error);
         } 
@@ -23,5 +24,20 @@ export default class Recipe {
     calcTime() {
         this.timeMins = Math.ceil((this.ingredients.length) / 3) * 15;
         this.serves = this.timeMins > 30 ? 3 : 4;
+    }
+
+    standardizeIngredients() {
+        const existingUnits = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
+        const standardUnits = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+
+        const newIngredients = this.ingredients.map(current => {
+            let ingredient = current.toLowerCase();
+            existingUnits.forEach((item, index) => {
+                ingredient = ingredient.replace(item, standardUnits[index]);
+            });
+            ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
+            return ingredient;
+        });
+        this.ingredients = newIngredients;
     }
 }
