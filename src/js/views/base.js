@@ -3,10 +3,11 @@ searchStart: document.querySelector('.search'),
 searchFeild: document.querySelector('.search__field'),
 resultList: document.querySelector('.results__list'),
 searchResult: document.querySelector('.results'),
-resultsPage: document.querySelector('.results__pages')
+resultsPage: document.querySelector('.results__pages'),
+recipeDisplay: document.querySelector('.recipe')
 };
 
-export const loaderElement = {
+const loaderElement = {
     loader: 'loader'
 }
 

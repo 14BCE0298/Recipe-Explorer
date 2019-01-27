@@ -3,6 +3,7 @@ import search from './models/Search';
 import * as viewTools from './views/searchView';
 import { elements, loaderIcon, clearLoader } from './views/base';
 import recipeController from './models/Recipe';
+import * as recipeViewer from './views/recipeView';
 
 /**Global state of the app
  * - Search object conatining query and result
@@ -50,10 +51,14 @@ elements.resultsPage.addEventListener('click' , e => {
 const getRecipeDetails = async() => {
     const id = window.location.hash.replace('#', '');
     if(id) {
+        recipeViewer.clearRecipe();
+        loaderIcon(elements.recipeDisplay);
         state.dishFromId = new recipeController(id);
         try {
         await state.dishFromId.getRecipe();
         console.log(state.dishFromId);
+        clearLoader();
+        recipeViewer.displayRecipe(state.dishFromId);
         } catch (error) {
             alert(`${error} getting recipe from Id`);
         }
