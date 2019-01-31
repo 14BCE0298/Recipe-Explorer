@@ -53,6 +53,7 @@ const getRecipeDetails = async() => {
     if(id) {
         recipeViewer.clearRecipe();
         loaderIcon(elements.recipeDisplay);
+        viewTools.selectedOption(id);
         state.dishFromId = new recipeController(id);
         try {
         await state.dishFromId.getRecipe();

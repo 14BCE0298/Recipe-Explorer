@@ -9,7 +9,15 @@ export const clearSearchBar = () => {
 export const clearPreviousResult = () => {
     elements.resultList.innerHTML = '';
     elements.resultsPage.innerHTML = '';
-}
+};
+
+export const selectedOption = id => {
+    const resultsArray = Array.from(document.querySelectorAll('.results__link'));
+    resultsArray.map(current => {
+        current.classList.remove('results__link--active');  
+    })
+    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+};
 
 const limitTitleLength = (title) => {
     if(title.length > 17) {
@@ -28,7 +36,7 @@ const limitTitleLength = (title) => {
 const dispalyRecepieDetails = recipe => {
     const recepieUiEntry = `
             <li>
-            <a class="results__link results__link--active" href="#${recipe.recipe_id}">
+            <a class="results__link" href="#${recipe.recipe_id}">
                 <figure class="results__fig">
                     <img src="${recipe.image_url}" alt="${recipe.title}">
                 </figure>
