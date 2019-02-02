@@ -4,7 +4,8 @@ searchFeild: document.querySelector('.search__field'),
 resultList: document.querySelector('.results__list'),
 searchResult: document.querySelector('.results'),
 resultsPage: document.querySelector('.results__pages'),
-recipeDisplay: document.querySelector('.recipe')
+recipeDisplay: document.querySelector('.recipe'),
+listEntries: document.querySelector('.shopping__list')
 };
 
 const loaderElement = {

@@ -3,7 +3,10 @@ import search from './models/Search';
 import * as viewTools from './views/searchView';
 import { elements, loaderIcon, clearLoader } from './views/base';
 import recipeController from './models/Recipe';
+import listController from './models/List';
 import * as recipeViewer from './views/recipeView';
+import * as listViewer from './views/listView';
+
 
 /**Global state of the app
  * - Search object conatining query and result
@@ -70,6 +73,16 @@ const getRecipeDetails = async() => {
     window.addEventListener(event, getRecipeDetails);
 });
 
+const entryController = () => {
+    if(!state.list) {
+        state.list = new listController();
+        state.dishFromId.ingredients.forEach(current => {
+            const item = state.list.addItem(current.count, current.unit, current.ingredient);
+            listViewer.displayList(item);
+        })
+    }
+}
+
 elements.recipeDisplay.addEventListener('click', e => {
     if (e.target.matches('.btn-decrease, .btn-decrease *')) {
         if(state.dishFromId.serves > 1) {
@@ -79,7 +92,8 @@ elements.recipeDisplay.addEventListener('click', e => {
     } else if (e.target.matches('.btn-increase, .btn-increase *')) {
         state.dishFromId.updateDetails('add');
         recipeViewer.updateDishData(state.dishFromId);
+    } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
+        entryController();
     }
-    console.log(state.dishFromId);
 });
  
