@@ -22,8 +22,16 @@ export default class Recipe {
     }
 
     calcTime() {
-        this.timeMins = Math.ceil((this.ingredients.length) / 3) * 15;
-        this.serves = this.timeMins > 30 ? 3 : 4;
+        this.timeMins = Math.ceil((this.ingredients.length) / 5) * 15;
+        this.serves = this.timeMins > 30 ? 2 : 5;
+    }
+
+    updateDetails(type) {
+        const newServing = type === 'minus'? this.serves - 1 : this.serves + 1;
+        this.ingredients.forEach(current => {
+            current.count *= (newServing/this.serves);
+        });
+        this.serves = newServing;
     }
 
     standardizeIngredients() {
@@ -45,7 +53,7 @@ export default class Recipe {
                 const arrayCount = arrIngredients.slice(0, indexUnit);
                 let count;
                 if(arrayCount.length === 1) {
-                    count = eval(arrayCount[0].replace('-','+'));
+                    count = Math.ceil(eval(arrayCount[0].replace('-','+')) * 100) / 100;
                 } else {
                     count = eval(arrayCount.join('+'));
                 }

@@ -68,5 +68,18 @@ const getRecipeDetails = async() => {
 
 ['hashchange', 'load'].forEach(event => {
     window.addEventListener(event, getRecipeDetails);
-}) 
+});
+
+elements.recipeDisplay.addEventListener('click', e => {
+    if (e.target.matches('.btn-decrease, .btn-decrease *')) {
+        if(state.dishFromId.serves > 1) {
+        state.dishFromId.updateDetails('minus');
+        recipeViewer.updateDishData(state.dishFromId);
+        }
+    } else if (e.target.matches('.btn-increase, .btn-increase *')) {
+        state.dishFromId.updateDetails('add');
+        recipeViewer.updateDishData(state.dishFromId);
+    }
+    console.log(state.dishFromId);
+});
  
