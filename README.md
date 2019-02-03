@@ -2,7 +2,7 @@
 
 ### Find recipes of your your favorite dishes
 
-The project aims to provide recepies to user based on his input dish name, using an api call.
+The project aims to provide recepies to user based on his input dish name, using an api call. The functionalities involve serching for various recipes for a dish, finding details of ingredients requirements according to servings and adding list of recipes to users liked list.
 
 ### The project uses following tools:-
 
