@@ -6,6 +6,8 @@ import recipeController from './models/Recipe';
 import listController from './models/List';
 import * as recipeViewer from './views/recipeView';
 import * as listViewer from './views/listView';
+import likeTool from './models/Likes';
+import * as likeViewer from './views/likesView';
 
 
 /**Global state of the app
@@ -15,7 +17,7 @@ import * as listViewer from './views/listView';
  * - Liked receipes
  */
 const state = {};
-window.state = state;
+
 /**
  * Search Controller
  */
@@ -63,7 +65,7 @@ const getRecipeDetails = async() => {
         await state.dishFromId.getRecipe();
         console.log(state.dishFromId);
         clearLoader();
-        recipeViewer.displayRecipe(state.dishFromId);
+        recipeViewer.displayRecipe(state.dishFromId, state.likes.isLiked(id));
         } catch (error) {
             alert(`${error} getting recipe from Id`);
         }
@@ -82,6 +84,23 @@ const entryController = () => {
             listViewer.displayList(item);
         })
     }
+}
+
+state.likes = new likeTool();
+const likeController = () => {
+    if(!state.likes) state.likes = new likeTool();
+    const id = state.dishFromId.id;
+    console.log(id);
+    if (!state.likes.isLiked(id)) {
+         const newLike = state.likes.addLike(id, state.dishFromId.title, state.dishFromId.publisher, state.dishFromId.imgUrl);
+         likeViewer.toggleLikeIcon(true);
+         likeViewer.displayLike(newLike);
+    } else {
+        state.likes.deleteLike(id);
+        likeViewer.toggleLikeIcon(false);
+        likeViewer.deleteLike(id);
+    }
+    likeViewer.toggleLikeMenu(state.likes.getNumLikes());
 }
 
 elements.listEntries.addEventListener('click', e => {
@@ -106,6 +125,8 @@ elements.recipeDisplay.addEventListener('click', e => {
         recipeViewer.updateDishData(state.dishFromId);
     } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
         entryController();
+    } else if(e.target.matches('.recipe__love, .recipe__love *')) {
+        likeController();
     }
 });
  

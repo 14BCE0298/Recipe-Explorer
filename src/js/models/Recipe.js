@@ -23,7 +23,7 @@ export default class Recipe {
 
     calcTime() {
         this.timeMins = Math.ceil((this.ingredients.length) / 5) * 15;
-        this.serves = this.timeMins > 30 ? 2 : 5;
+        this.serves = this.timeMins > 30 ? 2 : 3;
     }
 
     updateDetails(type) {

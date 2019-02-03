@@ -16,7 +16,7 @@ export const selectedOption = id => {
     resultsArray.map(current => {
         current.classList.remove('results__link--active');  
     })
-    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+    document.querySelector(`.results__link[href="#${id}"]`).classList.add('results__link--active');
 };
 
 const limitTitleLength = (title) => {

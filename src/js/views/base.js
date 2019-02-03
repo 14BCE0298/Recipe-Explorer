@@ -5,7 +5,9 @@ resultList: document.querySelector('.results__list'),
 searchResult: document.querySelector('.results'),
 resultsPage: document.querySelector('.results__pages'),
 recipeDisplay: document.querySelector('.recipe'),
-listEntries: document.querySelector('.shopping__list')
+listEntries: document.querySelector('.shopping__list'),
+likesMenu: document.querySelector('.likes__field'),
+likesList: document.querySelector('.likes__list')
 };
 
 const loaderElement = {
